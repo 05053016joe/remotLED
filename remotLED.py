@@ -7,8 +7,8 @@ import mraa
 
 # change this to the values from MCS web console
 DEVICE_INFO = {
-    'device_id' : 'YOUR_DEVICE_ID',
-    'device_key' : 'YOUR_DEVICE_KEY'
+    'device_id' : 'DpwJPYEJ',
+    'device_key' : '1mOUe8ZVclT0CimZ'
 }
 
 # change 'INFO' to 'WARNING' to filter info messages
@@ -65,7 +65,7 @@ pin = None
 def setupLED():
     global pin
     # on LinkIt Smart 7699, pin 44 is the Wi-Fi LED.
-    pin = mraa.Gpio(44)
+    pin = GPIO.output(14)
     pin.dir(mraa.DIR_OUT)
 
 def setLED(state):
