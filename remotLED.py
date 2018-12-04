@@ -65,7 +65,10 @@ pin = None
 def setupLED():
     global pin
     # on LinkIt Smart 7699, pin 44 is the Wi-Fi LED.
-    pin = GPIO.output(14)
+    import time, RPi.GPIO as GPIO
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(14, GPIO.OUT)
+	pin = GPIO.setup(14, GPIO.OUT)
     pin.dir(mraa.DIR_OUT)
 
 def setLED(state):
