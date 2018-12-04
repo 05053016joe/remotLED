@@ -3,7 +3,12 @@ import requests
 import socket
 import threading
 import logging
-import mraa
+#import mraa
+import sys
+import urllib
+import time
+import json
+import httplib
 import time, RPi.GPIO as GPIO
 # change this to the values from MCS web console
 DEVICE_INFO = {
@@ -68,15 +73,13 @@ def setupLED():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(14, GPIO.OUT)
 	pin = GPIO.setup(14, GPIO.OUT)
-    pin.dir(mraa.DIR_OUT)
-
 def setLED(state):
     # Note the LED is "reversed" to the pin's GPIO status.
     # So we reverse it here.
     if state:
-        pin.write(0)
+        pin = GPIO.output(17, 1)
     else:
-        pin.write(1)
+        pin= GPIO.output(17, 1)
 
 if __name__ == '__main__':
     setupLED()
