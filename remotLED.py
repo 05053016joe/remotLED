@@ -4,7 +4,7 @@ import socket
 import threading
 import logging
 import mraa
-
+import time, RPi.GPIO as GPIO
 # change this to the values from MCS web console
 DEVICE_INFO = {
     'device_id' : 'DpwJPYEJ',
@@ -65,7 +65,6 @@ pin = None
 def setupLED():
     global pin
     # on LinkIt Smart 7699, pin 44 is the Wi-Fi LED.
-    import time, RPi.GPIO as GPIO
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(14, GPIO.OUT)
 	pin = GPIO.setup(14, GPIO.OUT)
