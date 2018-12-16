@@ -5,10 +5,7 @@ import threading
 import logging
 #import mraa
 import sys
-import urllib
 import time
-import json
-import httplib
 import time, RPi.GPIO as GPIO
 # change this to the values from MCS web console
 DEVICE_INFO = {
@@ -23,7 +20,7 @@ heartBeatTask = None
 
 def establishCommandChannel():
 	# Query command server's IP & port
-	connectionAPI = 'https://api.mediatek.com/mcs/v2/devices/Ds7jNCWY/connections.csv'
+	connectionAPI = 'https://api.mediatek.com/mcs/v2/devices/DpwJPYEJ/connections.csv'
 	r = requests.get(connectionAPI % DEVICE_INFO,headers = {'deviceKey' : DEVICE_INFO['device_key'],
 'Content-Type' : 'text/csv'})
 	logging.info("Command Channel IP,port=" + r.text)
@@ -65,12 +62,9 @@ def waitAndExecuteCommand(commandChannel):
 				logging.info("led :%d" % commandValue)
 				setLED(commandValue)
 
-pin = None
+
 def setupLED():
-	global pin
-	# on LinkIt Smart 7699, pin 44 is the Wi-Fi LED.
-	#pin = mraa.Gpio(44)
-	#pin.dir(mraa.DIR_OUT)
+	
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(17,GPIO.OUT)
 	LEDon = GPIO.output(17, 1)
@@ -79,14 +73,10 @@ def setupLED():
 
 
 def setLED(state):
-	# Note the LED is "reversed" to the pin's GPIO status.
-	# So we reverse it here.
 	if state:
-		#pin.write(0)
-		LEDon = GPIO.output(14, 1)
-	else:
-		#pin.write(1)
-		LEDoff = GPIO.output(14,0)
+		GPIO.output(17, 1)
+        else:
+		GPIO.output(17, 0)
 
 if __name__ == '__main__':
 	setupLED()
